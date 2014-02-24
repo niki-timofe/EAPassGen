@@ -71,7 +71,7 @@ function ajaxFunction(){
                 ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
             } catch (e){
                 // Something went wrong
-                alert("Your browser broke!");
+                document.pass_generator.submit();
                 return false;
             }
         }
@@ -96,7 +96,7 @@ function ajaxFunction(){
     Number:&nbsp;&nbsp;<input type="number" name="num" value="12"> <br>
     Syllables:&nbsp;<input type="number" name="sylls" value="4"> <br>
 
-    <p><input type="button" value="Generate" onclick="ajaxFunction();"></p>
+    <p><input id="submitter" type="button" value="Generate" onclick="ajaxFunction();"></p>
 </form>
 <div id="passwords">
 </div>

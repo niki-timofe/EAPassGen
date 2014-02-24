@@ -56,7 +56,7 @@
                     document.getElementById('passwords').innerHTML = ajaxRequest.responseText;
                 }
             };
-            ajaxRequest.open("GET", buildUrl('/gen', form_params(document.pass_generator)), true);
+            ajaxRequest.open("GET", buildUrl('/api/gen', form_params(document.pass_generator)), true);
             ajaxRequest.send(null);
         }
 

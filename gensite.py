@@ -4,9 +4,20 @@ from smartpassgen import generator
 app = Flask(__name__)
 
 
-@app.route('/gen')
+@app.route('/api/gen')
 def generate():
     res = ''
+    num = int(request.args['num']) if 'num' in request.args else 12
+    sylls = int(request.args['sylls']) if 'sylls' in request.args else 4
+
+    for _ in range(num):
+        res += str(generator.create_pass(sylls, 'caps' in request.args, 'nums' in request.args,
+                                         'symbs' in request.args)) + '<br>'
+    return res
+
+@app.route('/gen')
+def generate():
+    res = '<a href="/">Back</a>'
     num = int(request.args['num']) if 'num' in request.args else 12
     sylls = int(request.args['sylls']) if 'sylls' in request.args else 4
 

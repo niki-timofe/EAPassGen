@@ -4,101 +4,104 @@
     <title></title>
 </head>
 <script language="javascript" type="text/javascript">
-function form_params(form)
-{
-    var params = new Array()
-    var length = form.elements.length
-    for( var i = 0; i < length; i++ )
-    {
-    	element = form.elements[i]
+    function form_params(form) {
+        var params = new Array()
+        var length = form.elements.length
+        for (var i = 0; i < length; i++) {
+            element = form.elements[i]
 
-    	if(element.tagName == 'TEXTAREA' )
-    	{
-    		params[element.name] = element.value
-    	}
-    	else if( element.tagName == 'INPUT' )
-    	{
-    		if( element.type == 'text' || element.type == 'hidden' || element.type == 'password' || element.type == 'number')
-    		{
-    			params[element.name] = element.value
-    		}
-    		else if( element.type == 'radio' && element.checked )
-    		{
-    			if( !element.value )
-    				params[element.name] = "on"
-    			else
-    				params[element.name] = element.value
+            if (element.tagName == 'TEXTAREA') {
+                params[element.name] = element.value
+            }
+            else if (element.tagName == 'INPUT') {
+                if (element.type == 'text' || element.type == 'hidden' || element.type == 'password' || element.type == 'number') {
+                    params[element.name] = element.value
+                }
+                else if (element.type == 'radio' && element.checked) {
+                    if (!element.value)
+                        params[element.name] = "on"
+                    else
+                        params[element.name] = element.value
 
-    		}
-    		else if( element.type == 'checkbox' && element.checked )
-    		{
-    			if( !element.value )
-    				params[element.name] = "on"
-    			else
-    				params[element.name] = element.value
-    		}
-    	}
-    }
-    return params;
-}
-
-function buildUrl(url, parameters){
-    var qs = "";
-    for(var key in parameters) {
-        var value = parameters[key];
-        qs += encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&";
-    }
-    if (qs.length > 0){
-        qs = qs.substring(0, qs.length-1); //chop off last "&"
-        url = url + "?" + qs;
-    }
-    return url;
-}
-
-
-function ajaxFunction(){
-    var ajaxRequest;  // The variable that makes Ajax possible!
-
-    try{
-        // Opera 8.0+, Firefox, Safari
-        ajaxRequest = new XMLHttpRequest();
-    } catch (e){
-        // Internet Explorer Browsers
-        try{
-            ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
-        } catch (e) {
-            try{
-                ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
-            } catch (e){
-                // Something went wrong
-                document.pass_generator.submit();
-                return false;
+                }
+                else if (element.type == 'checkbox' && element.checked) {
+                    if (!element.value)
+                        params[element.name] = "on"
+                    else
+                        params[element.name] = element.value
+                }
             }
         }
+        return params;
     }
-    console.log(ajaxRequest)
-    // Create a function that will receive data sent from the server
-    ajaxRequest.onreadystatechange = function(){
-        console.log(document.getElementById('passwords').innerHTML)
-        if(ajaxRequest.readyState == 4){
-            document.getElementById('passwords').innerHTML = ajaxRequest.responseText;
+
+    function buildUrl(url, parameters) {
+        var qs = "";
+        for (var key in parameters) {
+            var value = parameters[key];
+            qs += encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&";
         }
+        if (qs.length > 0) {
+            qs = qs.substring(0, qs.length - 1); //chop off last "&"
+            url = url + "?" + qs;
+        }
+        return url;
     }
-    console.log(form_params(document.pass_generator))
-    ajaxRequest.open("GET", buildUrl('/gen', form_params(document.pass_generator)), true);
-    ajaxRequest.send(null);
-}
+
+    function ajaxFunction() {
+        // Create a function that will receive data sent from the server
+        ajaxRequest.onreadystatechange = function () {
+            if (ajaxRequest.readyState == 4) {
+                document.getElementById('passwords').innerHTML = ajaxRequest.responseText;
+            }
+        }
+        ajaxRequest.open("GET", buildUrl('/gen', form_params(document.pass_generator)), true);
+        ajaxRequest.send(null);
+    }
+
+    var ajaxRequest;  // The variable that makes Ajax possible!
 </script>
 <body>
+<!--suppress HtmlUnknownTarget -->
 <form action="/gen" method="get" name="pass_generator">
-    <input type="checkbox" name="nums"> 0-9 <br>
-    <input type="checkbox" name="caps"> A-Z <br>
-    Number:&nbsp;&nbsp;<input type="number" name="num" value="12"> <br>
-    Syllables:&nbsp;<input type="number" name="sylls" value="4"> <br>
+    <label>
+        <input type="checkbox" name="nums">
+        0-9
+    </label><br>
+    <label>
+        <input type="checkbox" name="caps">
+        A-Z
+    </label><br>
+    <label>
+        Number:
+        <input type="number" name="num" value="12">
+    </label> <br>
+    <label>
+        Syllables:
+        <input type="number" name="sylls" value="4">
+    </label> <br>
 
     <p><input id="submitter" type="button" value="Generate" onclick="ajaxFunction();"></p>
 </form>
 <div id="passwords">
 </div>
+<script type="text/javascript">
+    try {
+        // Opera 8.0+, Firefox, Safari
+        ajaxRequest = new XMLHttpRequest();
+    } catch (e) {
+        // Internet Explorer Browsers
+        try {
+            ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (e) {
+            try {
+                ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {
+                // Something went wrong
+                document.getElementById('submitter').type = 'submit'
+            }
+        }
+    }
+</script>
 </body>
 </html>

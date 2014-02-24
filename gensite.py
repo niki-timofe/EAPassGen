@@ -11,8 +11,10 @@ def generate():
     sylls = int(request.args['sylls']) if 'sylls' in request.args else 4
 
     for _ in range(num):
-        res += str(generator.create_pass(sylls, 'caps' in request.args, 'nums' in request.args)) + '<br>'
+        res += str(generator.create_pass(sylls, 'caps' in request.args, 'nums' in request.args,
+                                         'symbs' in request.args)) + '<br>'
     return res
+
 
 @app.route('/')
 def index():

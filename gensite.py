@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 
 @app.route('/api/gen')
-def generate():
+def api_generate():
     res = ''
     num = int(request.args['num']) if 'num' in request.args else 12
     sylls = int(request.args['sylls']) if 'sylls' in request.args else 4

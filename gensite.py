@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
+
 from smartpassgen import generator
+
 
 app = Flask(__name__)
 
@@ -14,6 +16,7 @@ def api_generate():
         res += str(generator.create_pass(sylls, 'caps' in request.args, 'nums' in request.args,
                                          'symbs' in request.args)) + '<br>'
     return res
+
 
 @app.route('/gen')
 def generate():

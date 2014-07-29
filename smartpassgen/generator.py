@@ -1,7 +1,7 @@
 from random import SystemRandom
 import math
 
-import constants
+from smartpassgen import constants
 
 
 def gen_syll(length):
@@ -58,4 +58,4 @@ def create_pass(sylls_num, with_caps=False, with_nums=False, with_symbs=False):
     # sylls_number = int(raw_input('Number of syllables in pass: '))
 
     # for _ in range(passes_number):
-    #     print create_pass(int(sylls_number))
+    # print create_pass(int(sylls_number))

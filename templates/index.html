@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
-    <title></title>
+    <title>Memorable passwords generator</title>
     <script language="javascript" type="text/javascript">
         function form_params(form) {
             var params = [];
@@ -73,31 +73,52 @@
 <!--suppress HtmlUnknownTarget -->
 <form action="/gen" method="get" name="pass_generator">
     <label>
-        <input type="checkbox" name="nums">
-        0-9
+        <input type="checkbox" name="leters" checked readonly onclick="return false">
+        a-z
     </label>
     <label>
         <input type="checkbox" name="caps">
         A-Z
     </label>
-        <label>
+    <label>
+        <input type="checkbox" name="nums">
+        0-9
+    </label>
+    <label>
         <input type="checkbox" name="symbs">
-        .-=
+        .-=<span style="color: gray">...</span>
     </label>
     <br><br>
     <label>
-        Number: <br>
+        Number
+        <small>(of passwords to generate)</small>
+        : <br>
         <input type="number" name="num" value="12">
     </label> <br>
     <label>
-        Syllables: <br>
+        Syllables
+        <small>(one syllable = approx. 2 symbols)</small>
+        : <br>
         <input type="number" name="sylls" value="4">
     </label> <br>
 
     <p><input id="submitter" type="button" value="Generate" onclick="ajaxFunction();"></p>
 </form>
-<div id="passwords">
+
+<div id="notice">
+    If no password is easy to remember you think, remove any checks (<input type="checkbox" checked>). <br>
+    Then you can complicate generated passwords by adding CapitalS, numb3rs or $ymbols manually.<br><br>
+    <b>E. g.</b>
+    <pre>whelao -> Whelao -> Wh3la0 -> Wh3l@0</pre>
 </div>
+
+<hr>
+
+<pre>
+    <div id="passwords">
+    </div>
+</pre>
+
 <script type="text/javascript">
     try {
         // Opera 8.0+, Firefox, Safari

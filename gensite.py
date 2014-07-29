@@ -20,7 +20,7 @@ def api_generate():
 
 @app.route('/gen')
 def generate():
-    res = '<a href="/">Back</a>'
+    res = '<a href="/">Back</a><hr>'
     num = int(request.args['num']) if 'num' in request.args else 12
     sylls = int(request.args['sylls']) if 'sylls' in request.args else 4
 

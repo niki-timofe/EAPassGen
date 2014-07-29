@@ -30,10 +30,26 @@ def randomize_capitals(pas, sylls_num):
 
 def add_some_numbers(pas, sylls_num):
     pas_list = list(pas)
-    for _ in range(SystemRandom().randint(1, sylls_num / 2)):
+
+    counter = 0
+
+    for _ in range(SystemRandom().randint(1, sylls_num)):
+        cur_num = SystemRandom().randint(0, len(pas) - 1)
+        if letter_to_number(pas_list[cur_num]):
+            counter += 1
+            pas_list[cur_num] = letter_to_number(pas_list[cur_num])
+
+    for _ in range(SystemRandom().randint(1, sylls_num / 2) - counter):
         cur_num = SystemRandom().randint(0, len(pas) - 1)
         pas_list[cur_num] = str(SystemRandom().randint(0, 9))
     return ''.join(pas_list)
+
+
+def letter_to_number(letter):
+    if letter in constants.CONV_LETTERS.keys():
+        return constants.CONV_LETTERS[letter]
+    else:
+        return False
 
 
 def add_some_symbols(pas, sylls_num):

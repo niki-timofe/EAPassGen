@@ -80,8 +80,8 @@ def create_pass(syllables_num, with_caps=False, with_nums=False, with_symbols=Fa
     return pas
 
 
-passes_number = int(raw_input('Number of passes to generate: '))
-syllables_number = int(raw_input('Number of syllables in pass: '))
+# passes_number = int(raw_input('Number of passes to generate: '))
+# syllables_number = int(raw_input('Number of syllables in pass: '))
 
 # for _ in range(passes_number):
 #     print create_pass(int(syllables_number), True, True, True)

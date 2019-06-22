@@ -1,29 +1,26 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html" lang="en-US">
 <head>
     <title>Memorable passwords generator</title>
-    <script language="javascript" type="text/javascript">
+    <script type="text/javascript">
         function form_params(form) {
-            var params = [];
-            var length = form.elements.length;
-            for (var i = 0; i < length; i++) {
-                var element = form.elements[i];
+            const params = [];
+            const length = form.elements.length;
+            for (let i = 0; i < length; i++) {
+                const element = form.elements[i];
 
-                if (element.tagName == 'TEXTAREA') {
+                if (element.tagName === 'TEXTAREA') {
                     params[element.name] = element.value
-                }
-                else if (element.tagName == 'INPUT') {
-                    if (element.type == 'text' || element.type == 'hidden' || element.type == 'password' || element.type == 'number') {
+                } else if (element.tagName === 'INPUT') {
+                    if (element.type === 'text' || element.type === 'hidden' || element.type === 'password' || element.type === 'number') {
                         params[element.name] = element.value
-                    }
-                    else if (element.type == 'radio' && element.checked) {
+                    } else if (element.type === 'radio' && element.checked) {
                         if (!element.value)
                             params[element.name] = "on";
                         else
                             params[element.name] = element.value
 
-                    }
-                    else if (element.type == 'checkbox' && element.checked) {
+                    } else if (element.type === 'checkbox' && element.checked) {
                         if (!element.value)
                             params[element.name] = "on";
                         else
@@ -35,11 +32,9 @@
         }
 
         function buildUrl(url, parameters) {
-            var qs = "";
-            for (var key in parameters) {
-                //noinspection JSUnfilteredForInLoop
-                var value = parameters[key];
-                //noinspection JSUnfilteredForInLoop
+            let qs = "";
+            for (const key in parameters) {
+                const value = parameters[key];
                 qs += encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&";
             }
             if (qs.length > 0) {
@@ -49,18 +44,17 @@
             return url;
         }
 
+        let ajaxRequest;  // The variable that makes Ajax possible!
         function ajaxFunction() {
             // Create a function that will receive data sent from the server
             ajaxRequest.onreadystatechange = function () {
-                if (ajaxRequest.readyState == 4) {
+                if (ajaxRequest.readyState === 4) {
                     document.getElementById('passwords').innerHTML = ajaxRequest.responseText;
                 }
             };
             ajaxRequest.open("GET", buildUrl('/api/gen', form_params(document.pass_generator)), true);
             ajaxRequest.send(null);
         }
-
-        var ajaxRequest;  // The variable that makes Ajax possible!
     </script>
     <style>
         html {

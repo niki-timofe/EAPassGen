@@ -2,7 +2,6 @@ from flask import Flask, render_template, request
 
 from smartpassgen import generator
 
-
 app = Flask(__name__)
 
 

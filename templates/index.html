@@ -55,6 +55,7 @@
             ajaxRequest.open("GET", buildUrl('/api/gen', form_params(document.pass_generator)), true);
             ajaxRequest.send(null);
         }
+
     </script>
     <style>
         html {
@@ -64,11 +65,11 @@
         input {
             font-size: 1.8vmin;
         }
+
     </style>
 </head>
 <body>
-<!--suppress HtmlUnknownTarget -->
-<form action="/gen" method="get" name="pass_generator">
+<form name="pass_generator">
     <label>
         <input type="checkbox" name="letters" checked readonly onclick="return false">
         a-z
@@ -111,9 +112,7 @@
 
 <hr>
 
-<pre>
-    <div id="passwords">
-    </div>
+<pre id="passwords">
 </pre>
 
 <script type="text/javascript">
@@ -133,7 +132,7 @@
             }
         }
     }
+
 </script>
-<!-- Copyright by Niki-Timofe (https://vk.com/id8930220) -->
 </body>
 </html>
